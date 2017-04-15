@@ -23,6 +23,8 @@ import (
 
 	"github.com/abaeve/services-common/config"
 	"golang.org/x/net/context"
+	"io/ioutil"
+	"strconv"
 )
 
 type bot struct {
@@ -42,6 +44,41 @@ var (
 	// Namespace for commands
 	Namespace = "go.micro.bot"
 )
+
+var DefaultFlags []cli.Flag = []cli.Flag{
+	cli.StringFlag{
+		Name:   "server_name",
+		EnvVar: "MICRO_SERVER_NAME",
+		Usage:  "Name of the server. go.micro.srv.example",
+	},
+	cli.StringFlag{
+		Name:  "inputs",
+		Usage: "Inputs to load on startup",
+	},
+	cli.StringFlag{
+		Name:   "namespace",
+		Usage:  "Set the namespace used by the bot to find commands e.g. com.example.bot",
+		EnvVar: "MICRO_BOT_NAMESPACE",
+	},
+	cli.IntFlag{
+		Name:   "register_ttl",
+		EnvVar: "MICRO_REGISTER_TTL",
+		Usage:  "Register TTL in seconds",
+	},
+	cli.IntFlag{
+		Name:   "register_interval",
+		EnvVar: "MICRO_REGISTER_INTERVAL",
+		Usage:  "Register interval in seconds",
+	},
+	cli.StringFlag{
+		Name:   "configuration_file",
+		Usage:  "The yaml configuration file for the service being loaded",
+		Value:  "/etc/auth-srv/application.yaml",
+		EnvVar: "CONFIGURATION_FILE",
+	},
+}
+
+var App *cli.App
 
 func help(commands map[string]command.Command, serviceCommands []string) command.Command {
 	usage := "help"
@@ -338,36 +375,36 @@ func (b *bot) watch() {
 
 func Run(ctx *cli.Context) {
 	var inputs []string
+	var conf *config.Configuration
 
-	conf := pushConfigFileIntoContext(ctx)
+	if len(ctx.String("configuration_file")) > 0 {
+		conf = &config.Configuration{}
 
-	if len(ctx.String("configuration_File")) > 0 {
-		//Parse the configuration file
+		conf.Load(ctx.String("configuration_file"))
+
+		ctx = cliContextFromConfiguration(conf)
 	}
 
-	//We might have what we need in the configuration file
-	if !conf.IsInitialized() {
-		if len(ctx.GlobalString("server_name")) > 0 {
-			Name = ctx.String("server_name")
-		}
+	if len(ctx.GlobalString("server_name")) > 0 {
+		Name = ctx.String("server_name")
+	}
 
-		if len(ctx.String("namespace")) > 0 {
-			Namespace = ctx.String("namespace")
-		}
+	if len(ctx.String("namespace")) > 0 {
+		Namespace = ctx.String("namespace")
+	}
 
-		// Parse flags
-		if len(ctx.String("inputs")) == 0 {
-			log.Println("[bot] no inputs specified")
-			cli.ShowAppHelp(ctx)
-			os.Exit(1)
-		}
+	// Parse flags
+	if len(ctx.String("inputs")) == 0 {
+		log.Println("[bot] no inputs specified")
+		cli.ShowAppHelp(ctx)
+		os.Exit(1)
+	}
 
-		inputs = strings.Split(ctx.String("inputs"), ",")
-		if len(inputs) == 0 {
-			log.Println("[bot] no inputs specified")
-			cli.ShowAppHelp(ctx)
-			os.Exit(1)
-		}
+	inputs = strings.Split(ctx.String("inputs"), ",")
+	if len(inputs) == 0 {
+		log.Println("[bot] no inputs specified")
+		cli.ShowAppHelp(ctx)
+		os.Exit(1)
 	}
 
 	// Init plugins
@@ -428,44 +465,95 @@ func Run(ctx *cli.Context) {
 	}
 }
 
-//func Commands() []cli.Command {
-//	flags := []cli.Flag{
-//		cli.StringFlag{
-//			Name:  "inputs",
-//			Usage: "Inputs to load on startup",
-//		},
-//		cli.StringFlag{
-//			Name:   "namespace",
-//			Usage:  "Set the namespace used by the bot to find commands e.g. com.example.bot",
-//			EnvVar: "MICRO_BOT_NAMESPACE",
-//		},
-//	}
-//
-//	// setup input flags
-//	for _, input := range input.Inputs {
-//		flags = append(flags, input.Flags()...)
-//	}
-//
-//	command := cli.Command{
-//		Name:   "bot",
-//		Usage:  "Run the micro bot",
-//		Flags:  flags,
-//		Action: Run,
-//	}
-//
-//	for _, p := range Plugins() {
-//		if cmds := p.Commands(); len(cmds) > 0 {
-//			command.Subcommands = append(command.Subcommands, cmds...)
-//		}
-//
-//		if flags := p.Flags(); len(flags) > 0 {
-//			command.Flags = append(command.Flags, flags...)
-//		}
-//	}
-//
-//	return []cli.Command{command}
-//}
+// Given a loaded configuration, this function will map what it finds available a newly created context to be loaded
+// by inputs and plugins.
+// Available Arguments and how they map to configuration
+//--server_name				How the bot registers itself				(conf.Namespace + "." + conf.Name)
+//--inputs				Inputs to load on startup				(conf.Inputs[])
+//--namespace				Set the namespace used by the bot to find commands	(conf.Namespace)
+//--register_ttl "0"			Register TTL in seconds					(conf.Registry.RegisterTTL)
+//--register_interval "0"		Register interval in seconds				(conf.Register.RegisterInterval)
+//--configuration_file			The yaml configuration file				(no equivalent in the created context... this loads it :P)
+//--hipchat_debug			Hipchat debug output					(?)
+//--hipchat_username			Hipchat XMPP username					(?)
+//--hipchat_password 			Hipchat XMPP password					(?)
+//--hipchat_server "chat.hipchat.com"	Hipchat XMPP server					(?)
+//--slack_debug				Slack debug output					(conf.Chat.Slack.Debug)
+//--slack_token				Slack token						(conf.Chat.Slack.Token)
+//--discord_token			Discord token						(conf.Chat.Discord.Token)
+//--discord_whitelist			Discord Whitelist (seperated by ,)			(conf.Chat.Discord.WhiteList[])
+//--discord_prefix "Micro "		Discord Prefix						(conf.Chat.Discord.Prefix)
+//--help, -h				show help						(no equivalent)
+func cliContextFromConfiguration(conf *config.Configuration) *cli.Context {
+	arguments := []string{}
 
-func pushConfigFileIntoContext(ctx *cli.Context) *config.Configuration {
-	return nil
+	if len(conf.Namespace) > 0 {
+		arguments = append(arguments, "--namespace="+conf.Namespace)
+	}
+	if len(conf.Name) > 0 {
+		arguments = append(arguments, "--server_name="+conf.Name)
+	}
+	if len(conf.Inputs) > 0 {
+		inputs := ""
+		for _, input := range conf.Inputs {
+			if inputs != "" {
+				inputs = inputs + "," + input
+			} else {
+				inputs = input
+			}
+		}
+		arguments = append(arguments, "--inputs="+inputs)
+	}
+
+	arguments = append(arguments, "--register_ttl="+strconv.Itoa(conf.Registry.RegisterTTL))
+	arguments = append(arguments, "--register_interval="+strconv.Itoa(conf.Registry.RegisterInterval))
+
+	if conf.Chat.Slack.Debug {
+		arguments = append(arguments, "--slack_debug")
+	}
+	if len(conf.Chat.Slack.Token) > 0 {
+		arguments = append(arguments, "--slack_token="+conf.Chat.Slack.Token)
+	}
+	if len(conf.Chat.Discord.Token) > 0 {
+		arguments = append(arguments, "--discord_token="+conf.Chat.Discord.Token)
+	}
+	if len(conf.Chat.Discord.WhiteList) > 0 {
+		whitelist := ""
+		for _, whitelisted := range conf.Chat.Discord.WhiteList {
+			if whitelist != "" {
+				whitelist = whitelist + "," + whitelisted
+			} else {
+				whitelist = whitelisted
+			}
+		}
+		arguments = append(arguments, "--discord_whitelist"+whitelist)
+	}
+	if len(conf.Chat.Discord.Prefix) > 0 {
+		arguments = append(arguments, "--discord_prefix="+conf.Chat.Discord.Prefix)
+	}
+
+	set := flagSet("config_set", App.Flags)
+	set.SetOutput(ioutil.Discard)
+	err := set.Parse(arguments)
+	nerr := normalizeFlags(App.Flags, set)
+	ctx := cli.NewContext(App, set, nil)
+
+	if nerr != nil {
+		fmt.Fprintln(App.Writer, nerr)
+		cli.ShowAppHelp(ctx)
+		return nil
+	}
+
+	if err != nil {
+		if App.OnUsageError != nil {
+			_ = App.OnUsageError(ctx, err, false)
+			return nil
+		} else {
+			fmt.Fprintf(App.Writer, "%s\n\n", "Incorrect Usage.")
+			cli.ShowAppHelp(ctx)
+			return nil
+		}
+	}
+
+	return ctx
 }

@@ -1,18 +1,19 @@
-namespace: your.namespace.to.register
-name: yourappname
-bot:
-  botToken: You bot token here, do not prepend Bot... we'll do that for you
-  authSrvNamespace: namespace that the auth-srv instance lives in
-  discordServerId: https://support.discordapp.com/hc/en-us/articles/206346498-Where-can-I-find-my-server-ID-
-oauth:
-  clientId: client_id
-  clientSecret: client_secret
-  callBackUrl: callback_url
-net:
-  listenHost: localhost
-  listenPort: 80
-serviceNames:
-  authSrv: auth-srv
+namespace: test.test.test
+name: app
+inputs:
+  - slack
+  - discord
 registry:
-  hostname: localhost
-  port: 8500
+  registerTtl: 20
+  registerInterval: 20
+chat:
+  slack:
+    debug: true
+    token: 123456
+  discord:
+    token: Bot 123456
+    whiteList:
+    - "1234567890"
+    - "2234567890"
+    - "3234567890"
+    prefix: "!"
