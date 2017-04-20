@@ -19,7 +19,7 @@ import (
 	_ "github.com/micro/go-bot/input/hipchat"
 	_ "github.com/micro/go-bot/input/slack"
 
-	proto "github.com/micro/go-bot/proto"
+	proto "github.com/abaeve/chremoas/proto"
 
 	"github.com/abaeve/services-common/config"
 	"golang.org/x/net/context"
