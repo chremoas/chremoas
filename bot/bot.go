@@ -19,9 +19,9 @@ import (
 	_ "github.com/micro/go-bot/input/hipchat"
 	_ "github.com/micro/go-bot/input/slack"
 
-	proto "github.com/abaeve/chremoas/proto"
+	proto "git.maurer-it.net/abaeve/chremoas/proto"
 
-	"github.com/abaeve/services-common/config"
+	"git.maurer-it.net/abaeve/services-common/config"
 	"golang.org/x/net/context"
 	"io/ioutil"
 	"strconv"
