@@ -1,7 +1,7 @@
 FROM arm32v6/alpine
 LABEL maintainer="maurer.it@gmail.com"
 
-RUN apk update && apk upgrade
+RUN apk update && apk upgrade && apk add ca-certificates
 
 ADD ./chremoas /
 WORKDIR /
