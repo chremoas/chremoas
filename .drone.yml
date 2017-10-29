@@ -16,7 +16,21 @@ pipeline:
     commands:
       - go get -t -v ./...
       - CGO_ENABLED=0 go build -ldflags "-X main.Version=$(git describe --abbrev=0 --tags)-${DRONE_BUILD_NUMBER}-$(git rev-parse --short HEAD)" -o chremoas .
+
   publish:
+    image: plugins/docker:linux-arm
+    repo: registry.maurer-it.net/chremoas
+    registry: registry.maurer-it.net
+    secrets:
+      - source: registry_user
+        target: PLUGIN_USERNAME
+      - source: registry_pass
+        target: PLUGIN_PASSWORD
+    tags: [ latest, 1.0.1 ]
+    when:
+      branch: [ tag ]
+
+  publish-snapshot:
     image: plugins/docker:linux-arm
     repo: registry.maurer-it.net/chremoas
     registry: registry.maurer-it.net
@@ -39,7 +53,7 @@ pipeline:
     port: 22
     script:
       - docker login -u ${registry_user} -p ${registry_pass} registry.maurer-it.net
-      - docker service create --name chremoas-dev --network chremoas-dev --with-registry-auth registry.maurer-it.net/chremoas:1.0.1-SNAPSHOT
+      - docker service create --name chremoas-dev --network chremoas-dev --env MICRO_REGISTRY_ADDRESS=chremoas-consul-dev:8500 --mount type=bind,source=/docker/etc/chremoas-dev,target=/etc/chremoas --with-registry-auth registry.maurer-it.net/chremoas:1.0.1-SNAPSHOT
     when:
       branch: [ release/* ]
 
@@ -55,4 +69,4 @@ pipeline:
       - docker login -u ${registry_user} -p ${registry_pass} registry.maurer-it.net
       - docker service create --name chremoas --network chremoas --with-registry-auth registry.maurer-it.net/chremoas:1.0.1
     when:
-      event: [ tag ]
+      event: [ deploy ]
