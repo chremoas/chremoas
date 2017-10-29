@@ -8,7 +8,7 @@ import (
 	_ "github.com/micro/go-plugins/micro/bot/input/discord"
 )
 
-var version string = "1.0.0"
+var Version string = "1.0.0"
 
 func main() {
 	app := cmd.App()
@@ -38,6 +38,6 @@ func main() {
 	cmd.Init(
 		cmd.Name("chremoas"),
 		cmd.Description("A bot to kill the Dramiel"),
-		cmd.Version(version),
+		cmd.Version(Version),
 	)
 }
