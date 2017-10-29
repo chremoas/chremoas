@@ -3,7 +3,7 @@ LABEL maintainer="maurer.it@gmail.com"
 
 RUN apk update && apk upgrade
 
-ADD ./chremaos /
+ADD ./chremoas /
 WORKDIR /
 
 RUN mkdir /etc/chremoas
