@@ -69,4 +69,5 @@ pipeline:
       - docker login -u ${registry_user} -p ${registry_pass} registry.maurer-it.net
       - docker service create --name chremoas --network chremoas --with-registry-auth registry.maurer-it.net/chremoas:1.0.1
     when:
-      event: [ deploy ]
+      event: deployment
+      environment: production
