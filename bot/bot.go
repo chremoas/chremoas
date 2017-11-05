@@ -16,8 +16,6 @@ import (
 
 	"github.com/micro/go-bot/command"
 	"github.com/micro/go-bot/input"
-	_ "github.com/micro/go-bot/input/hipchat"
-	_ "github.com/micro/go-bot/input/slack"
 
 	proto "git.maurer-it.net/abaeve/chremoas/proto"
 
