@@ -17,12 +17,13 @@ import (
 	"github.com/micro/go-bot/command"
 	"github.com/micro/go-bot/input"
 
-	proto "git.maurer-it.net/abaeve/chremoas/proto"
+	proto "github.com/abaeve/chremoas/proto"
 
-	"git.maurer-it.net/abaeve/services-common/config"
+	"github.com/abaeve/services-common/config"
 	"golang.org/x/net/context"
 	"io/ioutil"
 	"strconv"
+	"github.com/micro/go-micro/registry"
 )
 
 type bot struct {
@@ -67,6 +68,11 @@ var DefaultFlags []cli.Flag = []cli.Flag{
 		Name:   "register_interval",
 		EnvVar: "MICRO_REGISTER_INTERVAL",
 		Usage:  "Register interval in seconds",
+	},
+	cli.StringFlag{
+		Name: "registry_address",
+		EnvVar: "MICRO_REGISTRY_ADDRESS",
+		Usage: "The registry address and port <address>:<port>",
 	},
 	cli.StringFlag{
 		Name:   "configuration_file",
@@ -441,6 +447,11 @@ func Run(ctx *cli.Context) {
 		),
 		micro.RegisterInterval(
 			time.Duration(ctx.GlobalInt("register_interval"))*time.Second,
+		),
+		micro.Registry(
+			registry.NewRegistry(
+				registry.Addrs(ctx.GlobalString("registry_address")),
+			),
 		),
 	)
 
