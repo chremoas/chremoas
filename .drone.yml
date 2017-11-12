@@ -2,7 +2,7 @@ platform: linux/arm
 
 workspace:
   base: /go
-  path: src/git.maurer-it.net/abaeve/chremoas
+  path: src/github.com/abaeve/chremoas
 
 clone:
   default:

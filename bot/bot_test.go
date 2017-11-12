@@ -11,7 +11,7 @@ import (
 	"github.com/micro/go-bot/command"
 	"github.com/micro/go-bot/input"
 
-	"git.maurer-it.net/abaeve/services-common/config"
+	"github.com/abaeve/services-common/config"
 	"github.com/micro/go-micro"
 	"github.com/micro/go-micro/cmd"
 	"github.com/micro/go-micro/registry/mock"

@@ -1,7 +1,7 @@
 package main
 
 import (
-	"git.maurer-it.net/abaeve/chremoas/bot"
+	"github.com/abaeve/chremoas/bot"
 	"github.com/micro/go-bot/input"
 	_ "github.com/micro/go-bot/input/slack"
 	"github.com/micro/go-micro/cmd"
