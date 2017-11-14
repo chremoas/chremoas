@@ -28,7 +28,7 @@ pipeline:
         target: PLUGIN_PASSWORD
     tags: [ latest, 1.0.1 ]
     when:
-      branch: [ tag ]
+      event: [ tag ]
 
   publish-snapshot:
     image: plugins/docker:linux-arm
