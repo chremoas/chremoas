@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/abaeve/chremoas/bot"
+	"github.com/chremoas/chremoas/bot"
 	"github.com/micro/go-bot/input"
 	_ "github.com/micro/go-bot/input/hipchat"
 	_ "github.com/micro/go-bot/input/slack"
