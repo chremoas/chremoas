@@ -17,9 +17,9 @@ import (
 	"github.com/micro/go-bot/command"
 	"github.com/micro/go-bot/input"
 
-	proto "github.com/abaeve/chremoas/proto"
+	proto "github.com/chremoas/chremoas/proto"
 
-	"github.com/abaeve/services-common/config"
+	"github.com/chremoas/services-common/config"
 	"golang.org/x/net/context"
 	"io/ioutil"
 	"strconv"
