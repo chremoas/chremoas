@@ -166,10 +166,6 @@ func Test_cliContextFromConfiguration(t *testing.T) {
 		t.Fatal("Context was nil")
 	}
 
-	if ctx.String("server_name") != conf.Name {
-		t.Errorf("Expected server_name: (%s) but received: (%s)", conf.Name, ctx.String("server_name"))
-	}
-
 	if ctx.String("inputs") != "slack,discord" {
 		t.Errorf("Expected inputs: (slack,discord) but received: (%s)", ctx.String("inputs"))
 	}
