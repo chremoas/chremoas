@@ -499,9 +499,9 @@ func cliContextFromConfiguration(conf *config.Configuration) *cli.Context {
 	if len(conf.Namespace) > 0 {
 		arguments = append(arguments, "--namespace="+conf.Namespace)
 	}
-	if len(conf.Name) > 0 {
-		arguments = append(arguments, "--server_name="+conf.Name)
-	}
+	//if len(conf.Name) > 0 {
+	//	arguments = append(arguments, "--server_name="+conf.Name)
+	//}
 	if len(conf.Inputs) > 0 {
 		inputs := ""
 		for _, input := range conf.Inputs {
