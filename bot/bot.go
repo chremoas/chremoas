@@ -44,7 +44,7 @@ var (
 	Namespace = "go.micro.bot"
 )
 
-var DefaultFlags []cli.Flag = []cli.Flag{
+var DefaultFlags = []cli.Flag{
 	cli.StringFlag{
 		Name:   "server_name",
 		EnvVar: "MICRO_SERVER_NAME",
@@ -500,7 +500,7 @@ func cliContextFromConfiguration(conf *config.Configuration) *cli.Context {
 		arguments = append(arguments, "--namespace="+conf.Namespace)
 	}
 	//if len(conf.Name) > 0 {
-	//	arguments = append(arguments, "--server_name="+conf.Name)
+	arguments = append(arguments, "--server_name=chremoas")
 	//}
 	if len(conf.Inputs) > 0 {
 		inputs := ""
