@@ -6,4 +6,4 @@ VOLUME /etc/chremoas
 
 ENV MICRO_REGISTRY_ADDRESS chremoas-consul:8500
 
-ENTRYPOINT ["/chremoas", "--configuration_file", "/etc/chremoas/auth-bot.yaml"]
+ENTRYPOINT ["/chremoas", "--configuration_file", "/etc/chremoas/chremoas.yaml"]
