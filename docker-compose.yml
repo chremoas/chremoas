@@ -1,17 +1,29 @@
 version: '3'
 services:
+  redis:
+    image: "redis"
+
+  consul:
+    image: "consul"
+
   sig-cmd:
-    network_mode: "host"
     image: "chremoas/sig-cmd:1.0.0"
     volumes:
       - /etc/chremoas:/etc/chremoas
+    depends_on:
+      - consul
+
   role-cmd:
-    network_mode: "host"
     image: "chremoas/role-cmd:1.0.0"
     volumes:
       - /etc/chremoas:/etc/chremoas
+    depends_on:
+      - redis
+      - consul
+
   role-srv:
-    network_mode: "host"
     image: "chremoas/role-srv:1.0.0"
     volumes:
       - /etc/chremoas:/etc/chremoas
+    depends_on:
+      - consul
