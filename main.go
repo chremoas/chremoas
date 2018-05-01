@@ -9,7 +9,7 @@ import (
 	_ "github.com/micro/go-plugins/micro/bot/input/discord"
 )
 
-var Version = "1.0.0"
+var Version = "SET ME YOU KNOB"
 
 func main() {
 	app := cmd.App()
