@@ -4,14 +4,14 @@ services:
     network_mode: "host"
     image: "chremoas/sig-cmd:1.0.0"
     volumes:
-      - /Users/bhechinger/chremoas:/etc/chremoas
+      - /etc/chremoas:/etc/chremoas
   role-cmd:
     network_mode: "host"
     image: "chremoas/role-cmd:1.0.0"
     volumes:
-      - /Users/bhechinger/chremoas:/etc/chremoas
+      - /etc/chremoas:/etc/chremoas
   role-srv:
     network_mode: "host"
     image: "chremoas/role-srv:1.0.0"
     volumes:
-      - /Users/bhechinger/chremoas:/etc/chremoas
+      - /etc/chremoas:/etc/chremoas
