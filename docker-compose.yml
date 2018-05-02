@@ -2,24 +2,55 @@ version: '3'
 services:
   redis:
     image: "redis"
+    container_name: "chremoas-redis"
+    ports:
+      - "6380:6379"
+    networks:
+      - chremoas
 
   consul:
     image: "consul"
+    container_name: "chremoas-consul"
+    ports:
+      - "8500:8500"
+    networks:
+      - chremoas
 
-  sig-cmd:
-    image: "chremoas/sig-cmd:1.0.0"
+#  mariadb:
+#    image: "mariadb"
+#    container_name: "chremoas-mariadb"
+#    networks:
+#      - chremoas
+
+# services
+#  auth-srv:
+#    image: "chremoas/auth-srv:1.0.0"
+#    volumes:
+#      - /etc/chremoas:/etc/chremoas
+#    depends_on:
+#      - consul
+#      - mysql
+#    networks:
+#      - chremoas
+
+  esi-srv:
+    image: "chremoas/esi-srv:1.0.0"
     volumes:
       - /etc/chremoas:/etc/chremoas
     depends_on:
       - consul
+    networks:
+      - chremoas
 
-  role-cmd:
-    image: "chremoas/role-cmd:1.0.0"
+  perms-srv:
+    image: "chremoas/perms-srv:1.0.0"
     volumes:
       - /etc/chremoas:/etc/chremoas
     depends_on:
+      - consul
       - redis
-      - consul
+    networks:
+      - chremoas
 
   role-srv:
     image: "chremoas/role-srv:1.0.0"
@@ -27,3 +58,93 @@ services:
       - /etc/chremoas:/etc/chremoas
     depends_on:
       - consul
+      - redis
+    networks:
+      - chremoas
+
+# commands
+  auth-cmd:
+    image: "chremoas/auth-cmd:1.0.0"
+    volumes:
+      - /etc/chremoas:/etc/chremoas
+    depends_on:
+      - consul
+    networks:
+      - chremoas
+
+  filter-cmd:
+    image: "chremoas/filter-cmd:1.0.0"
+    volumes:
+      - /etc/chremoas:/etc/chremoas
+    depends_on:
+      - consul
+    networks:
+      - chremoas
+
+  lookup-cmd:
+    image: "chremoas/lookup-cmd:1.0.0"
+    volumes:
+      - /etc/chremoas:/etc/chremoas
+    depends_on:
+      - consul
+    networks:
+      - chremoas
+
+  perms-cmd:
+    image: "chremoas/perms-cmd:1.0.0"
+    volumes:
+      - /etc/chremoas:/etc/chremoas
+    depends_on:
+      - consul
+    networks:
+      - chremoas
+
+  role-cmd:
+    image: "chremoas/role-cmd:1.0.0"
+    volumes:
+      - /etc/chremoas:/etc/chremoas
+    depends_on:
+      - consul
+    networks:
+      - chremoas
+
+  sig-cmd:
+    image: "chremoas/sig-cmd:1.0.0"
+    volumes:
+      - /etc/chremoas:/etc/chremoas
+    depends_on:
+      - consul
+    networks:
+      - chremoas
+
+# gateways
+  discord-gateway:
+    image: "chremoas/discord-gateway:1.0.0"
+    volumes:
+      - /etc/chremoas:/etc/chremoas
+    depends_on:
+      - consul
+    networks:
+      - chremoas
+
+# misc
+  chremoas:
+    image: "chremoas/chremoas:1.0.0"
+    volumes:
+      - /etc/chremoas:/etc/chremoas
+    depends_on:
+      - consul
+    networks:
+      - chremoas
+
+  auth-esi-poller:
+    image: "chremoas/auth-esi-poller:1.0.0"
+    volumes:
+      - /etc/chremoas:/etc/chremoas
+    depends_on:
+      - consul
+    networks:
+      - chremoas
+
+networks:
+  chremoas:
