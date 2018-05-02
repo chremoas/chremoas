@@ -3,6 +3,9 @@ services:
   redis:
     image: "redis"
     container_name: "chremoas-redis"
+    volumes:
+      - /etc/chremoas/redis:/data
+      - /etc/chremoas/redis.conf:/usr/local/etc/redis.conf
     ports:
       - "6380:6379"
     networks:
@@ -21,7 +24,7 @@ services:
     container_name: "chremoas-mariadb"
     volumes:
       - /etc/chremoas/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
-      - /etc/chremoas/data:/var/lib/mysql
+      - /etc/chremoas/mysql:/var/lib/mysql
     ports:
       - "3307:3306"
     networks:
