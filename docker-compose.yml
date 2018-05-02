@@ -5,8 +5,7 @@ services:
     container_name: "chremoas-redis"
     volumes:
       - /etc/chremoas/redis:/data
-      - /etc/chremoas/redis.conf:/usr/local/etc/redis.conf
-    command: /usr/local/etc/redis.conf
+    command: /data/redis.conf
     ports:
       - "6380:6379"
     networks:
