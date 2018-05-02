@@ -12,26 +12,35 @@ services:
     image: "consul"
     container_name: "chremoas-consul"
     ports:
-      - "8500:8500"
+      - "8501:8500"
     networks:
       - chremoas
 
-#  mariadb:
-#    image: "mariadb"
-#    container_name: "chremoas-mariadb"
-#    networks:
-#      - chremoas
+  mariadb:
+    image: "mariadb"
+    container_name: "chremoas-mariadb"
+    volumes:
+      - /etc/chremoas/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+    ports:
+      - "3307:3306"
+    networks:
+      - chremoas
+    environment:
+      MYSQL_ROOT_PASSWORD: chremoas
+      MYSQL_DATABASE: chremoas
+      MYSQL_USER: chremoas
+      MYSQL_PASSWORD: chremoas
 
-# services
-#  auth-srv:
-#    image: "chremoas/auth-srv:1.0.0"
-#    volumes:
-#      - /etc/chremoas:/etc/chremoas
-#    depends_on:
-#      - consul
-#      - mysql
-#    networks:
-#      - chremoas
+ # services
+  auth-srv:
+    image: "chremoas/auth-srv:1.0.0"
+    volumes:
+      - /etc/chremoas:/etc/chremoas
+    depends_on:
+      - consul
+      - mariadb
+    networks:
+      - chremoas
 
   esi-srv:
     image: "chremoas/esi-srv:1.0.0"
