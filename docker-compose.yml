@@ -21,6 +21,7 @@ services:
     container_name: "chremoas-mariadb"
     volumes:
       - /etc/chremoas/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+      - /etc/chremoas/data:/var/lib/mysql
     ports:
       - "3307:3306"
     networks:
@@ -137,6 +138,17 @@ services:
       - chremoas
 
 # misc
+  auth-web:
+    image: "chremoas/auth-web:1.0.0"
+    volumes:
+      - /etc/chremoas:/etc/chremoas
+    ports:
+      - 3000:3000
+    depends_on:
+      - consul
+    networks:
+      - chremoas
+
   chremoas:
     image: "chremoas/chremoas:1.0.0"
     volumes:
