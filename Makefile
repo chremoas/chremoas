@@ -56,7 +56,23 @@ fmt:
 	cd - >/dev/null
 
 docker: linux
-	docker build -t ${GITHUB_USERNAME}/${BINARY}:${VERSION} .
+	docker build -t ${BINARY} .
+
+tag: tag-latest tag-version
+
+tag-version: docker
+	docker tag ${BINARY} ${GITHUB_USERNAME}/${BINARY}:${VERSION}
+
+tag-latest: docker
+	docker tag ${BINARY} ${GITHUB_USERNAME}/${BINARY}:latest
+
+publish: publish-latest publish-version
+
+publish-version: docker
+	docker push ${GITHUB_USERNAME}/${BINARY}:${VERSION}
+
+publish-latest: docker
+	docker push ${GITHUB_USERNAME}/${BINARY}:latest
 
 clean:
 	-rm -f ${TEST_REPORT}
