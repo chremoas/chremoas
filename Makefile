@@ -79,4 +79,4 @@ clean:
 	-rm -f ${VET_REPORT}
 	-rm -f ${BINARY}-*
 
-.PHONY: linux darwin windows test vet fmt clean docker
+.PHONY: linux darwin windows test vet fmt clean docker tag tag-version tag-latest publish publish-version publish-latest

@@ -1,40 +1,5 @@
 version: '3'
 services:
-  redis:
-    image: "redis"
-    container_name: "chremoas-redis"
-    volumes:
-      - /etc/chremoas/redis:/data
-    command: /data/redis.conf
-    ports:
-      - "6380:6379"
-    networks:
-      - chremoas
-
-  consul:
-    image: "consul"
-    container_name: "chremoas-consul"
-    ports:
-      - "8501:8500"
-    networks:
-      - chremoas
-
-  mariadb:
-    image: "mariadb"
-    container_name: "chremoas-mariadb"
-    volumes:
-      - /etc/chremoas/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
-      - /etc/chremoas/mysql:/var/lib/mysql
-    ports:
-      - "3307:3306"
-    networks:
-      - chremoas
-    environment:
-      MYSQL_ROOT_PASSWORD: chremoas
-      MYSQL_DATABASE: chremoas
-      MYSQL_USER: chremoas
-      MYSQL_PASSWORD: chremoas
-
  # services
   auth-srv:
     image: "chremoas/auth-srv"
