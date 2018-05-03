@@ -5,9 +5,6 @@ services:
     image: "chremoas/auth-srv"
     volumes:
       - /etc/chremoas:/etc/chremoas
-    depends_on:
-      - consul
-      - mariadb
     networks:
       - chremoas
 
@@ -15,8 +12,6 @@ services:
     image: "chremoas/esi-srv"
     volumes:
       - /etc/chremoas:/etc/chremoas
-    depends_on:
-      - consul
     networks:
       - chremoas
 
@@ -24,9 +19,6 @@ services:
     image: "chremoas/perms-srv"
     volumes:
       - /etc/chremoas:/etc/chremoas
-    depends_on:
-      - consul
-      - redis
     networks:
       - chremoas
 
@@ -34,9 +26,6 @@ services:
     image: "chremoas/role-srv"
     volumes:
       - /etc/chremoas:/etc/chremoas
-    depends_on:
-      - consul
-      - redis
     networks:
       - chremoas
 
@@ -45,8 +34,6 @@ services:
     image: "chremoas/auth-cmd"
     volumes:
       - /etc/chremoas:/etc/chremoas
-    depends_on:
-      - consul
     networks:
       - chremoas
 
@@ -54,8 +41,6 @@ services:
     image: "chremoas/filter-cmd"
     volumes:
       - /etc/chremoas:/etc/chremoas
-    depends_on:
-      - consul
     networks:
       - chremoas
 
@@ -63,8 +48,6 @@ services:
     image: "chremoas/lookup-cmd"
     volumes:
       - /etc/chremoas:/etc/chremoas
-    depends_on:
-      - consul
     networks:
       - chremoas
 
@@ -72,8 +55,6 @@ services:
     image: "chremoas/perms-cmd"
     volumes:
       - /etc/chremoas:/etc/chremoas
-    depends_on:
-      - consul
     networks:
       - chremoas
 
@@ -81,8 +62,6 @@ services:
     image: "chremoas/role-cmd"
     volumes:
       - /etc/chremoas:/etc/chremoas
-    depends_on:
-      - consul
     networks:
       - chremoas
 
@@ -90,8 +69,6 @@ services:
     image: "chremoas/sig-cmd"
     volumes:
       - /etc/chremoas:/etc/chremoas
-    depends_on:
-      - consul
     networks:
       - chremoas
 
@@ -100,8 +77,6 @@ services:
     image: "chremoas/discord-gateway"
     volumes:
       - /etc/chremoas:/etc/chremoas
-    depends_on:
-      - consul
     networks:
       - chremoas
 
@@ -112,8 +87,6 @@ services:
       - /etc/chremoas:/etc/chremoas
     ports:
       - 3000:3000
-    depends_on:
-      - consul
     networks:
       - chremoas
 
@@ -121,8 +94,6 @@ services:
     image: "chremoas/chremoas"
     volumes:
       - /etc/chremoas:/etc/chremoas
-    depends_on:
-      - consul
     networks:
       - chremoas
 
@@ -130,8 +101,6 @@ services:
     image: "chremoas/auth-esi-poller"
     volumes:
       - /etc/chremoas:/etc/chremoas
-    depends_on:
-      - consul
     networks:
       - chremoas
 
