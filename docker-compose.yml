@@ -2,28 +2,28 @@ version: '3'
 services:
  # services
   auth-srv:
-    image: "chremoas/auth-srv"
+    image: "chremoas/auth-srv:latest"
     volumes:
       - /etc/chremoas:/etc/chremoas
     networks:
       - chremoas
 
   esi-srv:
-    image: "chremoas/esi-srv"
+    image: "chremoas/esi-srv:latest"
     volumes:
       - /etc/chremoas:/etc/chremoas
     networks:
       - chremoas
 
   perms-srv:
-    image: "chremoas/perms-srv"
+    image: "chremoas/perms-srv:latest"
     volumes:
       - /etc/chremoas:/etc/chremoas
     networks:
       - chremoas
 
   role-srv:
-    image: "chremoas/role-srv"
+    image: "chremoas/role-srv:latest"
     volumes:
       - /etc/chremoas:/etc/chremoas
     networks:
@@ -31,42 +31,42 @@ services:
 
 # commands
   auth-cmd:
-    image: "chremoas/auth-cmd"
+    image: "chremoas/auth-cmd:latest"
     volumes:
       - /etc/chremoas:/etc/chremoas
     networks:
       - chremoas
 
   filter-cmd:
-    image: "chremoas/filter-cmd"
+    image: "chremoas/filter-cmd:latest"
     volumes:
       - /etc/chremoas:/etc/chremoas
     networks:
       - chremoas
 
   lookup-cmd:
-    image: "chremoas/lookup-cmd"
+    image: "chremoas/lookup-cmd:latest"
     volumes:
       - /etc/chremoas:/etc/chremoas
     networks:
       - chremoas
 
   perms-cmd:
-    image: "chremoas/perms-cmd"
+    image: "chremoas/perms-cmd:latest"
     volumes:
       - /etc/chremoas:/etc/chremoas
     networks:
       - chremoas
 
   role-cmd:
-    image: "chremoas/role-cmd"
+    image: "chremoas/role-cmd:latest"
     volumes:
       - /etc/chremoas:/etc/chremoas
     networks:
       - chremoas
 
   sig-cmd:
-    image: "chremoas/sig-cmd"
+    image: "chremoas/sig-cmd:latest"
     volumes:
       - /etc/chremoas:/etc/chremoas
     networks:
@@ -74,7 +74,7 @@ services:
 
 # gateways
   discord-gateway:
-    image: "chremoas/discord-gateway"
+    image: "chremoas/discord-gateway:latest"
     volumes:
       - /etc/chremoas:/etc/chremoas
     networks:
@@ -82,7 +82,7 @@ services:
 
 # misc
   auth-web:
-    image: "chremoas/auth-web"
+    image: "chremoas/auth-web:latest"
     volumes:
       - /etc/chremoas:/etc/chremoas
     ports:
@@ -91,14 +91,14 @@ services:
       - chremoas
 
   chremoas:
-    image: "chremoas/chremoas"
+    image: "chremoas/chremoas:latest"
     volumes:
       - /etc/chremoas:/etc/chremoas
     networks:
       - chremoas
 
   auth-esi-poller:
-    image: "chremoas/auth-esi-poller"
+    image: "chremoas/auth-esi-poller:latest"
     volumes:
       - /etc/chremoas:/etc/chremoas
     networks:

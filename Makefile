@@ -56,15 +56,15 @@ fmt:
 	cd - >/dev/null
 
 docker: linux
-	docker build -t ${BINARY} .
+	docker build -t ${GITHUB_USERNAME}/${BINARY} .
 
 tag: tag-latest tag-version
 
 tag-version: docker
-	docker tag ${BINARY} ${GITHUB_USERNAME}/${BINARY}:${VERSION}
+	docker tag ${GITHUB_USERNAME}/${BINARY} ${GITHUB_USERNAME}/${BINARY}:${VERSION}
 
 tag-latest: docker
-	docker tag ${BINARY} ${GITHUB_USERNAME}/${BINARY}:latest
+	docker tag ${GITHUB_USERNAME}/${BINARY} ${GITHUB_USERNAME}/${BINARY}:latest
 
 publish: publish-latest publish-version
 
@@ -79,4 +79,4 @@ clean:
 	-rm -f ${VET_REPORT}
 	-rm -f ${BINARY}-*
 
-.PHONY: linux darwin windows test vet fmt clean docker tag tag-version tag-latest publish publish-version publish-latest
+.PHONY: linux darwin windows test vet fmt docker tag tag-version tag-latest publish publish-version publish-latest clean
