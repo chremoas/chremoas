@@ -37,7 +37,7 @@ services:
 
  # services
   auth-srv:
-    image: "chremoas/auth-srv:1.0.0"
+    image: "chremoas/auth-srv"
     volumes:
       - /etc/chremoas:/etc/chremoas
     depends_on:
@@ -47,7 +47,7 @@ services:
       - chremoas
 
   esi-srv:
-    image: "chremoas/esi-srv:1.0.0"
+    image: "chremoas/esi-srv"
     volumes:
       - /etc/chremoas:/etc/chremoas
     depends_on:
@@ -56,7 +56,7 @@ services:
       - chremoas
 
   perms-srv:
-    image: "chremoas/perms-srv:1.0.0"
+    image: "chremoas/perms-srv"
     volumes:
       - /etc/chremoas:/etc/chremoas
     depends_on:
@@ -66,7 +66,7 @@ services:
       - chremoas
 
   role-srv:
-    image: "chremoas/role-srv:1.0.0"
+    image: "chremoas/role-srv"
     volumes:
       - /etc/chremoas:/etc/chremoas
     depends_on:
@@ -77,7 +77,7 @@ services:
 
 # commands
   auth-cmd:
-    image: "chremoas/auth-cmd:1.0.0"
+    image: "chremoas/auth-cmd"
     volumes:
       - /etc/chremoas:/etc/chremoas
     depends_on:
@@ -86,7 +86,7 @@ services:
       - chremoas
 
   filter-cmd:
-    image: "chremoas/filter-cmd:1.0.0"
+    image: "chremoas/filter-cmd"
     volumes:
       - /etc/chremoas:/etc/chremoas
     depends_on:
@@ -95,7 +95,7 @@ services:
       - chremoas
 
   lookup-cmd:
-    image: "chremoas/lookup-cmd:1.0.0"
+    image: "chremoas/lookup-cmd"
     volumes:
       - /etc/chremoas:/etc/chremoas
     depends_on:
@@ -104,7 +104,7 @@ services:
       - chremoas
 
   perms-cmd:
-    image: "chremoas/perms-cmd:1.0.0"
+    image: "chremoas/perms-cmd"
     volumes:
       - /etc/chremoas:/etc/chremoas
     depends_on:
@@ -113,7 +113,7 @@ services:
       - chremoas
 
   role-cmd:
-    image: "chremoas/role-cmd:1.0.0"
+    image: "chremoas/role-cmd"
     volumes:
       - /etc/chremoas:/etc/chremoas
     depends_on:
@@ -122,7 +122,7 @@ services:
       - chremoas
 
   sig-cmd:
-    image: "chremoas/sig-cmd:1.0.0"
+    image: "chremoas/sig-cmd"
     volumes:
       - /etc/chremoas:/etc/chremoas
     depends_on:
@@ -132,7 +132,7 @@ services:
 
 # gateways
   discord-gateway:
-    image: "chremoas/discord-gateway:1.0.0"
+    image: "chremoas/discord-gateway"
     volumes:
       - /etc/chremoas:/etc/chremoas
     depends_on:
@@ -142,7 +142,7 @@ services:
 
 # misc
   auth-web:
-    image: "chremoas/auth-web:1.0.0"
+    image: "chremoas/auth-web"
     volumes:
       - /etc/chremoas:/etc/chremoas
     ports:
@@ -153,7 +153,7 @@ services:
       - chremoas
 
   chremoas:
-    image: "chremoas/chremoas:1.0.0"
+    image: "chremoas/chremoas"
     volumes:
       - /etc/chremoas:/etc/chremoas
     depends_on:
@@ -162,7 +162,7 @@ services:
       - chremoas
 
   auth-esi-poller:
-    image: "chremoas/auth-esi-poller:1.0.0"
+    image: "chremoas/auth-esi-poller"
     volumes:
       - /etc/chremoas:/etc/chremoas
     depends_on:
