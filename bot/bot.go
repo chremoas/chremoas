@@ -187,7 +187,8 @@ func (b *bot) process(c input.Conn, ev input.Event) error {
 	var response []byte
 
 	// call service
-	if err := b.service.Client().Call(context.Background(), req, rsp); err != nil {
+	ctx, _ := context.WithTimeout(context.Background(), time.Minute)
+	if err := b.service.Client().Call(ctx, req, rsp); err != nil {
 		response = []byte("error executing cmd: " + err.Error())
 	} else if len(rsp.Error) > 0 {
 		response = []byte("error executing cmd: " + rsp.Error)
