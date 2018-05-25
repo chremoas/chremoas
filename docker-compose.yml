@@ -72,20 +72,20 @@ services:
     networks:
       - chremoas
 
-  purge-cmd:
-    image: "chremoas/purge-cmd:latest"
-    volumes:
-      - /etc/chremoas:/etc/chremoas
-    networks:
-      - chremoas
+#  purge-cmd:
+#    image: "chremoas/purge-cmd:latest"
+#    volumes:
+#      - /etc/chremoas:/etc/chremoas
+#    networks:
+#      - chremoas
 
 # gateways
-  discord-gateway:
-    image: "chremoas/discord-gateway:latest"
-    volumes:
-      - /etc/chremoas:/etc/chremoas
-    networks:
-      - chremoas
+#  discord-gateway:
+#    image: "chremoas/discord-gateway:latest"
+#    volumes:
+#      - /etc/chremoas:/etc/chremoas
+#    networks:
+#      - chremoas
 
 # misc
   auth-web:
