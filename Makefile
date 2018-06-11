@@ -68,10 +68,10 @@ tag-latest: docker
 
 publish: publish-latest publish-version
 
-publish-version: docker
+publish-version: tag
 	docker push ${GITHUB_USERNAME}/${BINARY}:${VERSION}
 
-publish-latest: docker
+publish-latest: tag
 	docker push ${GITHUB_USERNAME}/${BINARY}:latest
 
 clean:
