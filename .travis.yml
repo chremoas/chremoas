@@ -1,8 +1,15 @@
 language: go
 sudo: false
 go:
-  - 1.8
+  - 1.9
 before_install:
-  - go get github.com/mattn/goveralls
+  - go get -t ./...
 script:
-  - $HOME/gopath/bin/goveralls -service=travis-ci
+  - make tag
+before_deploy:
+  - docker login -u ${DOCKER_USER} -p ${DOCKER_PASSWORD}
+deploy:
+  provider: script
+  script: make publish
+  on:
+    branch: master
