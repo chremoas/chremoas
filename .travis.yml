@@ -1,15 +1,25 @@
 language: go
 sudo: false
 go:
-  - 1.9
+  - "1.10"
 before_install:
   - go get -t ./...
 script:
   - make tag
 before_deploy:
   - docker login -u ${DOCKER_USER} -p ${DOCKER_PASSWORD}
+  - export GIT_TAG=$(cat VERSION)
+  - git config --global user.email "builds@travis-ci.com"
+  - git config --global user.name "Travis CI"
+  - git tag ${GIT_TAG} -a -m "Generated tag from TravisCI for build ${TRAVIS_BUILD_NUMBER}"
+  - git push -q https://${TAGPERM}@github.com/${TRAVIS_REPO_SLUG} -f --tags
 deploy:
+  skip_cleanup: true
   provider: script
   script: make publish
   on:
+    tags: false
     branch: master
+branches:
+  except:
+    - /^*-v[0-9]/
