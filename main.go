@@ -5,8 +5,8 @@ import (
 	"github.com/micro/go-bot/input"
 	_ "github.com/micro/go-bot/input/hipchat"
 	_ "github.com/micro/go-bot/input/slack"
-	"github.com/micro/go-micro/cmd"
-	_ "github.com/micro/go-plugins/micro/bot/input/discord"
+	_ "github.com/micro/go-micro/agent/input/discord"
+	"github.com/micro/go-micro/config/cmd"
 )
 
 var Version = "SET ME YOU KNOB"
