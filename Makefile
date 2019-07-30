@@ -24,28 +24,22 @@ all: clean test vet linux docker
 
 linux:
 	CGO_ENABLED=0 GOOS=linux GOARCH=${GOARCH} go build ${LDFLAGS} -o ${BINARY}-linux-${GOARCH} . ; \
-	cd - >/dev/null
 
 darwin:
 	CGO_ENABLED=0 GOOS=darwin GOARCH=${GOARCH} go build ${LDFLAGS} -o ${BINARY}-darwin-${GOARCH} . ; \
-	cd - >/dev/null
 
 windows:
 	CGO_ENABLED=0 GOOS=windows GOARCH=${GOARCH} go build ${LDFLAGS} -o ${BINARY}-windows-${GOARCH}.exe . ; \
-	cd - >/dev/null
 
 #test:
 #	if ! hash go2xunit 2>/dev/null; then go install github.com/tebeka/go2xunit; fi
 #	godep go test -v ./... 2>&1 | go2xunit -output ${TEST_REPORT} ; \
-#	cd - >/dev/null
 
 vet:
 	godep go vet ./... > ${VET_REPORT} 2>&1 ; \
-	cd - >/dev/null
 
 fmt:
 	go fmt $$(go list ./... | grep -v /vendor/) ; \
-	cd - >/dev/null
 
 docker: linux
 	docker build -t ${GITHUB_USERNAME}/${BINARY} .
