@@ -21,6 +21,7 @@ import (
 
 	"github.com/chremoas/services-common/config"
 	"github.com/micro/go-micro/registry"
+	"github.com/micro/go-micro/registry/consul"
 	"golang.org/x/net/context"
 	"io/ioutil"
 	"strconv"
@@ -450,7 +451,7 @@ func Run(ctx *cli.Context) {
 			time.Duration(ctx.GlobalInt("register_interval"))*time.Second,
 		),
 		micro.Registry(
-			registry.NewRegistry(
+			consul.NewRegistry(
 				registry.Addrs(ctx.GlobalString("registry_address")),
 			),
 		),
