@@ -299,6 +299,7 @@ github.com/micro/cli v0.2.0 h1:ut3rV5JWqZjsXIa2MvGF+qMUP8DAUTvHX9Br5gO4afA=
 github.com/micro/cli v0.2.0/go.mod h1:jRT9gmfVKWSS6pkKcXQ8YhUyj6bzwxK8Fp5b0Y7qNnk=
 github.com/micro/go-bot v1.1.0 h1:srxwxv/6xsyDTSz37dmDqxC8SJbfp2MkR0754/tILrY=
 github.com/micro/go-bot v1.1.0/go.mod h1:wodQnZJedhANtriMfhCJa07WK6UnZE2QFNNRlmL3NoI=
+github.com/micro/go-log v0.1.0 h1:szYSR+yyTsomZM2jyinJC5562DlqffSjHmTZFaeZ2vY=
 github.com/micro/go-log v0.1.0/go.mod h1:qaFBF6d6Jk01Gz4cbMkCA2vVuLk3FSaLLjmEGrMCreA=
 github.com/micro/go-micro v0.23.0/go.mod h1:3z3lfMkNU9Sr1L/CxL++8pVJmQapRo0N6kNjwYDtOVs=
 github.com/micro/go-micro v1.8.0 h1:4etDwf3DqP61cM0xrI+3OP+FlAsRUnM2rwBXFRTrl+Y=
