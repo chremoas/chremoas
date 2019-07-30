@@ -20,10 +20,10 @@ import (
 	proto "github.com/chremoas/chremoas/proto"
 
 	"github.com/chremoas/services-common/config"
+	"github.com/micro/go-micro/registry"
 	"golang.org/x/net/context"
 	"io/ioutil"
 	"strconv"
-	"github.com/micro/go-micro/registry"
 )
 
 type bot struct {
@@ -70,9 +70,9 @@ var DefaultFlags = []cli.Flag{
 		Usage:  "Register interval in seconds",
 	},
 	cli.StringFlag{
-		Name: "registry_address",
+		Name:   "registry_address",
 		EnvVar: "MICRO_REGISTRY_ADDRESS",
-		Usage: "The registry address and port <address>:<port>",
+		Usage:  "The registry address and port <address>:<port>",
 	},
 	cli.StringFlag{
 		Name:   "configuration_file",
@@ -434,7 +434,7 @@ func Run(ctx *cli.Context) {
 	for _, io := range inputs {
 		i, ok := input.Inputs[io]
 		if !ok {
-			log.Printf("[bot] input %s not found\n", i)
+			log.Printf("[bot] input %v not found\n", i)
 			os.Exit(1)
 		}
 		ios[io] = i
