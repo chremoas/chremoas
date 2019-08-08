@@ -14,7 +14,7 @@ BRANCH=$(shell git rev-parse --abbrev-ref HEAD)
 
 # Symlink into GOPATH
 GITHUB_USERNAME=chremoas
-CURRENT_DIR=$(shell pwd)
+DEV_REGISTRY=docker.4amlunch.net
 
 # Setup the -ldflags option for go build here, interpolate the variable values
 LDFLAGS = -ldflags "-w -X main.Version=${VERSION} -X main.Commit=${COMMIT} -X main.Branch=${BRANCH}"
@@ -52,6 +52,9 @@ tag-version: docker
 tag-latest: docker
 	docker tag ${GITHUB_USERNAME}/${BINARY} ${GITHUB_USERNAME}/${BINARY}:latest
 
+tag-dev: docker
+	docker tag ${GITHUB_USERNAME}/${BINARY} ${DEV_REGISTRY}/${BINARY}:${VERSION}
+
 publish: publish-latest publish-version
 
 publish-version: tag
@@ -59,6 +62,9 @@ publish-version: tag
 
 publish-latest: tag
 	docker push ${GITHUB_USERNAME}/${BINARY}:latest
+
+publish-dev: tag-dev
+	docker push ${DEV_REGISTRY}/${BINARY}:${VERSION}
 
 clean:
 	-rm -f ${TEST_REPORT}

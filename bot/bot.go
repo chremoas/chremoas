@@ -308,9 +308,19 @@ func (b *bot) watch() {
 		req := b.service.Client().NewRequest(service, "Command.Help", &proto.HelpRequest{})
 		rsp := &proto.HelpResponse{}
 
-		err := b.service.Client().Call(context.Background(), req, rsp)
-		if err != nil {
-			return "", err
+		count := 0
+		for {
+			err := b.service.Client().Call(context.Background(), req, rsp)
+			if err == nil {
+				break
+			} else {
+				log.Printf("Retrying client call, count: %d\n", count)
+				if count >= 50 {
+					return "", err
+				}
+				count += 1
+				time.Sleep(time.Duration(count) * time.Millisecond)
+			}
 		}
 
 		return fmt.Sprintf("%s - %s", rsp.Usage, rsp.Description), nil
@@ -357,13 +367,19 @@ func (b *bot) watch() {
 			return
 		}
 
+		log.Printf("Watch action: %s service: %s\n", res.Action, res.Service.Name)
+
 		if res.Action == "delete" {
 			delete(services, res.Service.Name)
 		} else {
 			h, err := getHelp(res.Service.Name)
 			if err != nil {
+				if res.Service.Name != "net.4amlunch.dev.chremoas" {
+					log.Printf("Error from getHelp: %s\n", err)
+				}
 				continue
 			}
+			log.Printf("Response from getHelp: %s\n", h)
 			services[res.Service.Name] = h
 		}
 
