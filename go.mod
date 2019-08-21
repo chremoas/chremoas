@@ -3,7 +3,7 @@ module github.com/chremoas/chremoas
 go 1.12
 
 require (
-	github.com/chremoas/services-common v1.2.4
+	github.com/chremoas/services-common v1.2.5
 	github.com/golang/protobuf v1.3.2
 	github.com/lusis/go-slackbot v0.0.0-20180109053408-401027ccfef5 // indirect
 	github.com/lusis/slack-test v0.0.0-20190426140909-c40012f20018 // indirect
