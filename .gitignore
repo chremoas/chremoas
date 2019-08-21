@@ -24,5 +24,4 @@ _testmain.go
 *.prof
 
 application.yaml
-chremoas
 chremoas-linux-amd64
