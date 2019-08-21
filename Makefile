@@ -23,13 +23,13 @@ LDFLAGS = -ldflags "-w -X main.Version=${VERSION} -X main.Commit=${COMMIT} -X ma
 all: clean test vet linux docker
 
 linux:
-	CGO_ENABLED=0 GOOS=linux GOARCH=${GOARCH} go build ${LDFLAGS} -o ${BINARY}-linux-${GOARCH} . ; \
+	CGO_ENABLED=0 GOOS=linux GOARCH=${GOARCH} go build -mod=vendor ${LDFLAGS} -o ${BINARY}-linux-${GOARCH} . ; \
 
 darwin:
-	CGO_ENABLED=0 GOOS=darwin GOARCH=${GOARCH} go build ${LDFLAGS} -o ${BINARY}-darwin-${GOARCH} . ; \
+	CGO_ENABLED=0 GOOS=darwin GOARCH=${GOARCH} go build -mod=vendor ${LDFLAGS} -o ${BINARY}-darwin-${GOARCH} . ; \
 
 windows:
-	CGO_ENABLED=0 GOOS=windows GOARCH=${GOARCH} go build ${LDFLAGS} -o ${BINARY}-windows-${GOARCH}.exe . ; \
+	CGO_ENABLED=0 GOOS=windows GOARCH=${GOARCH} go build -mod=vendor ${LDFLAGS} -o ${BINARY}-windows-${GOARCH}.exe . ; \
 
 #test:
 #	if ! hash go2xunit 2>/dev/null; then go install github.com/tebeka/go2xunit; fi

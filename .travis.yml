@@ -2,8 +2,6 @@ language: go
 sudo: false
 go:
   - 1.13beta1
-before_install:
-  - go mod download
 script:
   - make tag
 before_deploy:
