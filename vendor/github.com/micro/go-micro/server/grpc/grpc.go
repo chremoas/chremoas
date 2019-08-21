@@ -271,12 +271,12 @@ func (g *grpcServer) handler(srv interface{}, stream grpc.ServerStream) error {
 	g.rpc.mu.Unlock()
 
 	if service == nil {
-		return status.New(codes.Unimplemented, fmt.Sprintf("unknown service %v", service)).Err()
+		return status.New(codes.Unimplemented, fmt.Sprintf("unknown service %s", serviceName)).Err()
 	}
 
 	mtype := service.method[methodName]
 	if mtype == nil {
-		return status.New(codes.Unimplemented, fmt.Sprintf("unknown service %v", service)).Err()
+		return status.New(codes.Unimplemented, fmt.Sprintf("unknown service %s.%s", serviceName, methodName)).Err()
 	}
 
 	// process unary
@@ -700,7 +700,6 @@ func (g *grpcServer) Deregister() error {
 }
 
 func (g *grpcServer) Start() error {
-	registerDebugHandler(g)
 	config := g.opts
 
 	// micro: config.Transport.Listen(config.Address)
@@ -719,10 +718,10 @@ func (g *grpcServer) Start() error {
 		return err
 	}
 
-	baddr := strings.Join(config.Broker.Options().Addrs, ",")
+	baddr := config.Broker.Address()
 	bname := config.Broker.String()
 
-	log.Logf("Broker [%s] Listening on %s", bname, baddr)
+	log.Logf("Broker [%s] Connected to %s", bname, baddr)
 
 	// announce self to the world
 	if err := g.Register(); err != nil {
