@@ -25,6 +25,9 @@ all: clean test vet linux docker
 linux:
 	CGO_ENABLED=0 GOOS=linux GOARCH=${GOARCH} go build -mod=vendor ${LDFLAGS} -o ${BINARY}-linux-${GOARCH} . ; \
 
+illumos:
+	CGO_ENABLED=0 GOOS=illumos GOARCH=${GOARCH} go build -mod=vendor ${LDFLAGS} -o ${BINARY}-illumos-${GOARCH} . ; \
+
 darwin:
 	CGO_ENABLED=0 GOOS=darwin GOARCH=${GOARCH} go build -mod=vendor ${LDFLAGS} -o ${BINARY}-darwin-${GOARCH} . ; \
 
@@ -66,9 +69,13 @@ publish-latest: tag
 publish-dev: tag-dev
 	docker push ${DEV_REGISTRY}/${BINARY}:${VERSION}
 
+install-illumos: illumos
+	cp ${BINARY}-illumos-${GOARCH} /usr/local/bin/${BINARY}
+	svccfg import smf.xml
+
 clean:
 	-rm -f ${TEST_REPORT}
 	-rm -f ${VET_REPORT}
 	-rm -f ${BINARY}-*
 
-.PHONY: linux darwin windows test vet fmt docker tag tag-version tag-latest publish publish-version publish-latest clean
+.PHONY: linux illumos darwin windows test vet fmt docker tag tag-version tag-latest publish publish-version publish-latest clean
