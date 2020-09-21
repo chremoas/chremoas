@@ -12,6 +12,7 @@ github.com/bwmarrin/discordgo
 # github.com/cheekybits/genny v1.0.0
 github.com/cheekybits/genny/generic
 # github.com/chremoas/services-common v1.2.5
+## explicit
 github.com/chremoas/services-common/config
 # github.com/coreos/etcd v3.3.13+incompatible
 github.com/coreos/etcd/client
@@ -27,6 +28,7 @@ github.com/fsnotify/fsnotify
 github.com/go-log/log
 github.com/go-log/log/log
 # github.com/golang/protobuf v1.3.2
+## explicit
 github.com/golang/protobuf/jsonpb
 github.com/golang/protobuf/proto
 github.com/golang/protobuf/ptypes
@@ -90,13 +92,19 @@ github.com/lucas-clemente/quic-go/internal/utils
 github.com/lucas-clemente/quic-go/internal/wire
 github.com/lucas-clemente/quic-go/quictrace
 github.com/lucas-clemente/quic-go/quictrace/pb
+# github.com/lusis/go-slackbot v0.0.0-20180109053408-401027ccfef5
+## explicit
+# github.com/lusis/slack-test v0.0.0-20190426140909-c40012f20018
+## explicit
 # github.com/magiconair/properties v1.8.0
 github.com/magiconair/properties
 # github.com/marten-seemann/qtls v0.3.2
 github.com/marten-seemann/qtls
 # github.com/micro/cli v0.2.0
+## explicit
 github.com/micro/cli
 # github.com/micro/go-bot v1.1.0
+## explicit
 github.com/micro/go-bot/command
 github.com/micro/go-bot/input
 github.com/micro/go-bot/input/discord
@@ -105,6 +113,7 @@ github.com/micro/go-bot/input/slack
 # github.com/micro/go-log v0.1.0
 github.com/micro/go-log
 # github.com/micro/go-micro v1.9.1
+## explicit
 github.com/micro/go-micro
 github.com/micro/go-micro/broker
 github.com/micro/go-micro/broker/http
@@ -161,6 +170,7 @@ github.com/micro/hipchat/xmpp
 # github.com/micro/mdns v0.3.0
 github.com/micro/mdns
 # github.com/micro/micro v1.8.0
+## explicit
 github.com/micro/micro/plugin
 # github.com/miekg/dns v1.1.15
 github.com/miekg/dns
@@ -245,6 +255,7 @@ golang.org/x/crypto/openpgp/s2k
 golang.org/x/crypto/poly1305
 golang.org/x/crypto/salsa20/salsa
 # golang.org/x/net v0.0.0-20190724013045-ca1201d0de80
+## explicit
 golang.org/x/net/bpf
 golang.org/x/net/context
 golang.org/x/net/http/httpguts
@@ -309,3 +320,5 @@ google.golang.org/grpc/tap
 gopkg.in/alecthomas/kingpin.v2
 # gopkg.in/yaml.v2 v2.2.2
 gopkg.in/yaml.v2
+# github.com/chremoas/chremoas => ../chremoas
+# github.com/hashicorp/consul => github.com/hashicorp/consul v1.5.1
