@@ -338,6 +338,7 @@ github.com/micro/go-micro v1.8.0 h1:4etDwf3DqP61cM0xrI+3OP+FlAsRUnM2rwBXFRTrl+Y=
 github.com/micro/go-micro v1.8.0/go.mod h1:RUJTXVb+qUnGx6jBK2yMCOzuB/xEKh/vdZc3uagM5TI=
 github.com/micro/go-micro v1.9.1 h1:qlMB4hrttOQeo1rPkMZyLzjSJZXLxTcfkkk8lKIxRbQ=
 github.com/micro/go-micro v1.9.1/go.mod h1:duT+Yo83/MnUMmRAeCDKaZdqwqpYJt70eHoEdPTZGmc=
+github.com/micro/go-micro v1.18.0 h1:gP70EZVHpJuUIT0YWth192JmlIci+qMOEByHm83XE9E=
 github.com/micro/go-rcache v0.1.0/go.mod h1:INzyZjXO5M+PmN2A33YxD4TaOY61xjFIM4CfSHv+At8=
 github.com/micro/h2c v1.0.0/go.mod h1:54sOOQW/GRlHhH43vKwOhUb+kHaXhVxR0d3CJhn9alE=
 github.com/micro/hipchat v0.0.0-20160328000638-4c67119ac956 h1:ODOMInAkMMz9ONunNfIw9NDVyOBCOy22vB9YASXyupQ=

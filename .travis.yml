@@ -1,10 +1,16 @@
 language: go
-sudo: false
+sudo: required
 go:
-  - 1.13beta1
-script:
-  - make tag
-before_deploy:
+  - 1.14
+before_install:
+  - curl -fsSL https://get.docker.com | sh
+  - echo '{"experimental":"enabled"}' | sudo tee /etc/docker/daemon.json
+  - mkdir -p $HOME/.docker
+  - echo '{"experimental":"enabled"}' | sudo tee $HOME/.docker/config.json
+  - sudo service docker start
+install:
+  - docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+  - docker buildx create --name xbuilder --use
   - docker login -u ${DOCKER_USER} -p ${DOCKER_PASSWORD}
   - export GIT_TAG=$(cat VERSION)
   - git config --global user.email "builds@travis-ci.com"
@@ -14,7 +20,7 @@ before_deploy:
 deploy:
   skip_cleanup: true
   provider: script
-  script: make publish
+  script: make docker
   on:
     tags: false
     branch: master
