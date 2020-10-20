@@ -7,6 +7,12 @@ services:
       - /etc/chremoas:/etc/chremoas
     networks:
       - chremoas
+    environment:
+      CONSUL: $(HOST_IP):8500
+      MICRO_REGISTRY_ADDRESS: $(HOST_IP):8500
+      MICRO_CLIENT_REQUEST_TIMEOUT: 5m
+      MICRO_REGISTRY: consul
+      CONFIG_NAMESPACE: {{ .Release.Name }}
 
   esi-srv:
     image: "chremoas/esi-srv:latest"

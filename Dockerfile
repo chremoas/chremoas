@@ -10,12 +10,14 @@ RUN mkdir /app
 ADD . /app/
 WORKDIR /app
 #RUN CGO_ENABLED=0 go build ${LDFLAGS} .
-RUN CGO_ENABLED=0 go build -ldflags "-w -X main.Version=${VERSION} -X main.Commit=${COMMIT} -X main.Branch=${BRANCH}" .
-
+RUN CGO_ENABLED=0 go build -ldflags \
+    "-w -X main.Version=${VERSION} -X main.Commit=${COMMIT} -X main.Branch=${BRANCH}" . && \
+    chmod 755 ${BINARY} && \
+    cp ${BINARY} servic
 
 FROM scratch
 MAINTAINER Brian Hechinger <wonko@4amlunch.net>
 VOLUME /etc/chremoas
-COPY --from=build /app/${BINARY} /${BINARY}
+COPY --from=build /app/service /service
 
-ENTRYPOINT ["/${BINARY}", "--configuration_file", "/etc/chremoas/chremoas.yaml"]
+ENTRYPOINT ["/service", "--configuration_file", "/etc/chremoas/chremoas.yaml"]

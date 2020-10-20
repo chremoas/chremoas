@@ -1,0 +1,7 @@
+version: '3'
+services:
+  consul:
+    image: "consul"
+    container_name: "chremoas-consul"
+    ports:
+      - "8500"

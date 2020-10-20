@@ -11,7 +11,7 @@ github.com/armon/go-metrics
 github.com/bwmarrin/discordgo
 # github.com/cheekybits/genny v1.0.0
 github.com/cheekybits/genny/generic
-# github.com/chremoas/services-common v1.2.5
+# github.com/chremoas/services-common v1.3.0
 ## explicit
 github.com/chremoas/services-common/config
 # github.com/coreos/etcd v3.3.13+incompatible

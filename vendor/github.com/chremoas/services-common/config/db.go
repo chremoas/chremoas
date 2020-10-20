@@ -3,6 +3,7 @@ package config
 import (
 	"errors"
 	"fmt"
+	"github.com/spf13/viper"
 )
 
 func (c Configuration) NewConnectionString() (string, error) {
@@ -10,17 +11,17 @@ func (c Configuration) NewConnectionString() (string, error) {
 		return "", errors.New("Configuration not initialized, call Load() before calling this.")
 	}
 
-	return c.Database.Driver +
+	return viper.GetString("database.driver") +
 		"://" +
-		c.Database.Username +
+		viper.GetString("database.username") +
 		":" +
-		c.Database.Password +
+		viper.GetString("database.password") +
 		"@" +
-		c.Database.Host +
+		viper.GetString("database.host") +
 		":" +
-		fmt.Sprintf("%d", c.Database.Port) +
+		fmt.Sprintf("%d", viper.GetInt("database.port")) +
 		"/" +
-		c.Database.Database +
+		viper.GetString("database.database") +
 		"?" +
-		c.Database.Options, nil
+		viper.GetString("database.options"), nil
 }

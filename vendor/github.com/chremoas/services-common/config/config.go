@@ -87,6 +87,8 @@ func (c *Configuration) Load(filename string) error {
 	logger, _ := zap.NewProduction()
 	sugar := logger.Sugar()
 
+	sugar.Info("LEEEEEEEROY JENKIIIIIIINS")
+
 	configNameSpace := os.Getenv("CONFIG_NAMESPACE")
 	if configNameSpace == "" {
 		configNameSpace = "default"
@@ -100,6 +102,7 @@ func (c *Configuration) Load(filename string) error {
 	viper.SetConfigFile(filename)
 
 	if fileReadErr = viper.ReadInConfig(); fileReadErr == nil {
+		sugar.Info("Successfully read local config file")
 		fileRead = true
 	}
 
@@ -115,8 +118,11 @@ func (c *Configuration) Load(filename string) error {
 				viper.SetConfigType(configType) // because there is no file extension in a stream of bytes, supported extensions are "json", "toml", "yaml", "yml", "properties", "props", "prop"
 
 				if remoteReadErr = viper.ReadRemoteConfig(); remoteReadErr == nil {
+					sugar.Info("Successfully read remote config")
 					remoteRead = true
 				}
+			} else {
+				sugar.Info(err.Error())
 			}
 		}
 	}
