@@ -11,6 +11,7 @@ auth-web
 purge-cmd
 perms-srv
 perms-cmd
+filter-cmd
 lookup-cmd
 discord-gateway
 services-common

@@ -68,6 +68,8 @@ github.com/chremoas/services-common v1.2.5 h1:43d+roMFdVzOv7KzUKV7B2z3hUNnGJhgT8
 github.com/chremoas/services-common v1.2.5/go.mod h1:LQDKkCa7367dW2jcNfS3C4vHFP0UuxJ/krSXjx31kRo=
 github.com/chremoas/services-common v1.3.0 h1:+9Q0X5EBuDaycp1Jt/k1yhtIje49wV8yMpnqhXq/W5I=
 github.com/chremoas/services-common v1.3.0/go.mod h1:LQDKkCa7367dW2jcNfS3C4vHFP0UuxJ/krSXjx31kRo=
+github.com/chremoas/services-common v1.3.1 h1:tUs1i3xqdpDaUY66JfLMNxMtyTqGC42e6jIvS7UoR7I=
+github.com/chremoas/services-common v1.3.1/go.mod h1:LQDKkCa7367dW2jcNfS3C4vHFP0UuxJ/krSXjx31kRo=
 github.com/chzyer/readline v0.0.0-20180603132655-2972be24d48e/go.mod h1:nSuG5e5PlCu98SY8svDHJxuZscDgtXS6KTTbou5AhLI=
 github.com/circonus-labs/circonus-gometrics v0.0.0-20161109192337-d17a8420c36e/go.mod h1:nmEj6Dob7S7YxXgwXpfOuvO54S+tGdZdw9fuRZt25Ag=
 github.com/circonus-labs/circonus-gometrics v2.3.1+incompatible/go.mod h1:nmEj6Dob7S7YxXgwXpfOuvO54S+tGdZdw9fuRZt25Ag=

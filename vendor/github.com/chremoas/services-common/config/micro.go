@@ -7,6 +7,7 @@ import (
 	"github.com/micro/go-micro/registry"
 	"github.com/micro/go-micro/registry/consul"
 	"github.com/prometheus/common/log"
+	"os"
 	"strconv"
 	"time"
 )
@@ -47,12 +48,20 @@ func NewService(version, serviceType string, serviceName string, initFunc InitFu
 					return err
 				}
 
+				var regAddress string
+				addr, ok := os.LookupEnv("MICRO_REGISTRY_ADDRESS")
+				if ok {
+					regAddress = addr
+				} else {
+					regAddress = conf.Registry.Hostname + ":" + strconv.Itoa(conf.Registry.Port)
+				}
+
 				svc.Init(micro.Name(conf.LookupService(serviceType, serviceName)))
 				svc.Init(
 					micro.Registry(
 						consul.NewRegistry(
 							registry.Addrs(
-								conf.Registry.Hostname + ":" + strconv.Itoa(conf.Registry.Port),
+								regAddress,
 							),
 						),
 					),
