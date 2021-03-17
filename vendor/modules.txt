@@ -7,13 +7,16 @@ github.com/alecthomas/units
 github.com/armon/consul-api
 # github.com/armon/go-metrics v0.0.0-20190430140413-ec5e00d3c878
 github.com/armon/go-metrics
+# github.com/beorn7/perks v1.0.1
+github.com/beorn7/perks/quantile
 # github.com/bwmarrin/discordgo v0.19.0
 github.com/bwmarrin/discordgo
 # github.com/cheekybits/genny v1.0.0
 github.com/cheekybits/genny/generic
-# github.com/chremoas/services-common v1.3.1
+# github.com/chremoas/services-common v1.3.2
 ## explicit
 github.com/chremoas/services-common/config
+github.com/chremoas/services-common/prometheus
 # github.com/coreos/etcd v3.3.13+incompatible
 github.com/coreos/etcd/client
 github.com/coreos/etcd/pkg/pathutil
@@ -100,6 +103,8 @@ github.com/lucas-clemente/quic-go/quictrace/pb
 github.com/magiconair/properties
 # github.com/marten-seemann/qtls v0.3.2
 github.com/marten-seemann/qtls
+# github.com/matttproud/golang_protobuf_extensions v1.0.1
+github.com/matttproud/golang_protobuf_extensions/pbutil
 # github.com/micro/cli v0.2.0
 ## explicit
 github.com/micro/cli
@@ -199,8 +204,20 @@ github.com/nlopes/slack/slackutilsx
 github.com/pelletier/go-toml
 # github.com/pkg/errors v0.8.1
 github.com/pkg/errors
+# github.com/prometheus/client_golang v1.1.0
+github.com/prometheus/client_golang/prometheus
+github.com/prometheus/client_golang/prometheus/internal
+github.com/prometheus/client_golang/prometheus/promhttp
+# github.com/prometheus/client_model v0.0.0-20190129233127-fd36f4220a90
+github.com/prometheus/client_model/go
 # github.com/prometheus/common v0.6.0
+github.com/prometheus/common/expfmt
+github.com/prometheus/common/internal/bitbucket.org/ww/goautoneg
 github.com/prometheus/common/log
+github.com/prometheus/common/model
+# github.com/prometheus/procfs v0.0.3
+github.com/prometheus/procfs
+github.com/prometheus/procfs/internal/fs
 # github.com/sean-/seed v0.0.0-20170313163322-e2103e2c3529
 github.com/sean-/seed
 # github.com/sirupsen/logrus v1.4.2
@@ -228,6 +245,7 @@ go.uber.org/atomic
 # go.uber.org/multierr v1.1.0
 go.uber.org/multierr
 # go.uber.org/zap v1.10.0
+## explicit
 go.uber.org/zap
 go.uber.org/zap/buffer
 go.uber.org/zap/internal/bufferpool
