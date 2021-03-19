@@ -14,15 +14,17 @@ Due to the nature of the dependency tree (and the new go module sum business) up
 
 #### Group 3
 1) role-srv (depends on: discord-gateway perms-srv)
-1) auth-srv (depends on: role-srv)
 
 #### Group 4
-1) auth-web (depends on: auth-srv)
+1) auth-srv (depends on: role-srv)
+
+#### Group 5
 1) auth-cmd (depends on: auth-srv chremoas)
-1) lookup-cmd (depends on: chremoas esi-srv)
-1) role-cmd (depends on: chremoas perms-srv role-srv)
 1) auth-esi-poller (depends on: auth-srv esi-srv)
+1) auth-web (depends on: auth-srv)
 1) filter-cmd (depends on: chremoas perms-srv role-srv)
+1) lookup-cmd (depends on: chremoas esi-srv)
 1) perms-cmd (depends on: chremoas perms-srv role-srv)
+1) role-cmd (depends on: chremoas perms-srv role-srv)
 1) sig-cmd (depends on: chremoas perms-srv role-srv)
 
